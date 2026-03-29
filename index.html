@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- -->
+    <link rel="icon" type="image/png" sizes="32*32" href="https://i.ibb.co/V0TJ4dLd/nitro32.png" />
+    <meta name="description"
+        content="Unleash your engine's true potential. We provide premium ethanol fuel additives designed to boost performance, clean your fuel system, and deliver a smoother ride." />
+    <meta property="og:title" content="x-nitro - Power and protection in every drop" />
+    <meta property="og:type" content="x-nitro website" />
+    <meta property="og:image" content="https://i.ibb.co/DgTvfsT8/nitro630.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:description"
+        content="specializes in high-performance ethanol fuel additives designed to optimize engine efficiency, enhance combustion, and protect fuel systems from corrosion. Power and protection in every drop." />
+    <meta property="og:site_name" content="x-nitro - Power and protection in every drop" />
+    <!-- -->
+
+    <title>X-NITRO - Power and protection in every drop</title>
+    <link rel="stylesheet" href="./style.css">
+    <link rel="preload" href="./nitro.png" as="image">
+    <script src="./script.js" defer></script>
+</head>
+
+<body>
+
+    <header>
+        <div class="logo">X-NITRO</div>
+        <button class="cart-btn" id="cart-btn">Cart (<span id="cart-count">0</span>)</button>
+    </header>
+
+    <section class="hero">
+        <div class="product-image">
+            <img src="./nitro.png" alt="Ethanol Fuel Additive">
+        </div>
+        <div class="product-details">
+            <h1 class="accent">Ethanol Fuel Additive</h1>
+            <p class="paragraph">
+                Unleash your engine's true potential. We provide premium ethanol fuel additives designed to boost
+                performance, clean your fuel system, and deliver a smoother ride.
+            </p>
+
+            <div class="price">185 EGP<span class="price-suffix"> / per liter</span>
+            </div>
+            <button class="add-to-cart-btn" id="add-to-cart-btn" data-name="Misshow Octane (One liter)"
+                data-price="185">add to
+                cart</button>
+        </div>
+    </section>
+
+    <section class="info-section">
+
+        <div class="specs">
+            <h2 class="accent">Technical specifications</h2>
+            <table>
+                <tr>
+                    <th>substance concentration</th>
+                    <td>96%</td>
+                </tr>
+                <tr>
+                    <th>Item size</th>
+                    <td>1 & 5 liter </td>
+                </tr>
+                <tr>
+                    <th>chemical formula</th>
+                    <td>C2H5OH</td>
+                </tr>
+                <tr>
+                    <th>country of origin</th>
+                    <td>China</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="features">
+            <h2 class="accent">Key benefits</h2>
+            <ul>
+                <li>Protection: Combats rust, corrosion, and varnish buildup caused by ethanol in the fuel system</li>
+                <li>Performance: Boosts octane, restores lost power, torque, and improves engine acceleration</li>
+                <li>Stability: Prevents phase separation (water-induced breakdown of the fuel) and degradation during
+                    storage</li>
+                <li>Application: Generally formulated for all 2-stroke and 4-stroke gasoline engines (cars, motorcycles,
+                    boats)</li>
+            </ul>
+        </div>
+        <div class="features">
+            <h2 class="accent">details of ethanol fuel additives</h2>
+            <ul>
+                <li>Usage: Usually added directly to the fuel tank before filling to ensure proper mixing</li>
+                <li>Add at a rate of 1 liter for every 40-50 liters of gasoline</li>
+            </ul>
+        </div>
+
+        <div class="features">
+            <h3 class="warn">Warnings</h3>
+            <ul>
+                <li>Do not exceed 10% of total fuel</li>
+                <li>For use with gasoline engines only</li>
+                <li>Not suitable for diesel engines</li>
+                <li>Keep away from heat and flames</li>
+                <li>Keep out of reach of children</li>
+            </ul>
+        </div>
+
+    </section>
+
+    <footer class="accent">
+        <h3>Contact us</h3>
+        <p>Phone: +201064001414</p>
+        <p>Email: info@x-nitro.com</p>
+        <p>Address: Suez, Egypt</p>
+        <p class="footer-copy">All rights reserved x-nitro<sup>©</sup> 2026</p>
+    </footer>
+
+    <div class="overlay" id="overlay"></div>
+    <div class="cart-sidebar" id="cart-sidebar">
+        <div class="cart-header">
+            <h2>Shopping cart</h2>
+            <button class="close-cart" id="close-cart-btn">&times;</button>
+        </div>
+        <div class="cart-items" id="cart-items">
+            <p class="empty-cart-msg">Your shopping cart is currently empty</p>
+        </div>
+        <div class="cart-total">Total: <span id="total-price">0</span> EGP</div>
+        <button class="whatsapp-btn" id="whatsapp-btn">تأكيد الطلب عبر واتساب</button>
+    </div>
+
+</body>
+
+</html>
