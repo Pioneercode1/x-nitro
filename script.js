@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
         cartItemsDiv.addEventListener('click', (e) => {
             const target = e.target;
             const indexStr = target.getAttribute('data-index');
-            
+
             // Allow clicking on child elements like an icon if added later
             const itemIndex = indexStr !== null ? parseInt(indexStr) : parseInt(target.closest('button')?.getAttribute('data-index'));
 
@@ -55,13 +55,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function addToCart(productName, price) {
         const existingItem = cart.find(item => item.name === productName);
-        
+
         if (existingItem) {
             existingItem.quantity += 1;
         } else {
             cart.push({ name: productName, price: price, quantity: 1 });
         }
-        
+
         updateCartUI();
 
         // Open cart to show user that the item was added
@@ -94,7 +94,7 @@ document.addEventListener('DOMContentLoaded', () => {
         cartCountSpan.innerText = totalItems;
         totalPriceSpan.innerText = totalPrice;
 
-        cartItemsDiv.innerHTML = ''; 
+        cartItemsDiv.innerHTML = '';
 
         if (cart.length === 0) {
             cartItemsDiv.innerHTML = '<p class="empty-cart-msg">Your shopping cart is currently empty</p>';
@@ -129,16 +129,16 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        let whatsappNumber = "201064001414";
+        let whatsappNumber = "201038229597";
         let message = "السلام عليكم، عايز أطلب الآتي:%0A";
-        
+
         const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
 
         cart.forEach((item, index) => {
             message += `${index + 1}- ${item.name} (Quantity: ${item.quantity}) - ${item.price * item.quantity} EGP%0A`;
         });
         message += `%0Aالإجمالي: ${totalPrice} EGP`;
-        
+
         let url = `https://wa.me/${whatsappNumber}?text=${message}`;
         window.open(url, '_blank');
     }

@@ -1,13 +1,10 @@
-
 :root {
     --bg-color: #ffffff;
     --surface-color: #627c7c;
     --primary-color: #00e676;
-    --text-main: #ffffff;
     --text-muted: #121212;
-    --accent: #00e5ff;
+    --accent: #810e21;
     /* لون سيان عصري */
-    --accent-hover: #00b3cc;
 }
 
 * {
@@ -39,13 +36,13 @@ header {
 .logo {
     font-size: 24px;
     font-weight: bold;
-    color: var(--accent-hover);
+    color: var(--accent);
 }
 
 .cart-btn {
     background: none;
-    border: 2px solid var(--primary-color);
-    color: var(--primary-color);
+    border: 2px solid var(--text-muted);
+    color: var(--text-muted);
     padding: 8px 15px;
     border-radius: 5px;
     cursor: pointer;
@@ -55,8 +52,8 @@ header {
 }
 
 .cart-btn:hover {
-    background: var(--primary-color);
-    color: #000;
+    background: var(--text-muted);
+    color: var(--bg-color)
 }
 
 .paragraph {
@@ -77,11 +74,17 @@ header {
     flex: 1;
     min-width: 300px;
     background-color: var(--surface-color);
-    padding: 8px;
+    padding: 1px;
     border-radius: 8px;
     /*corner-shape: scoop;*/
     text-align: center;
     border: 1px solid #333;
+    transition: transform 0.7s ease-in;
+}
+
+.product-image:hover {
+    transform: scale(1.1);
+    transition: transform 0.4s linear;
 }
 
 .product-image img {
@@ -103,14 +106,14 @@ header {
 
 .price {
     font-size: 28px;
-    color: var(--primary-color);
+    color: var(--text-muted);
     font-weight: bold;
     margin: 20px 0;
 }
 
 .add-to-cart-btn {
-    background-color: var(--primary-color);
-    color: #000;
+    background-color: var(--text-muted);
+    color: var(--bg-color);
     border: none;
     padding: 15px 30px;
     font-size: 18px;
@@ -122,7 +125,7 @@ header {
 }
 
 .add-to-cart-btn:hover {
-    background-color: #00c765;
+    background-color: var(--surface-color);
 }
 
 /* المميزات والمواصفات */
@@ -144,7 +147,7 @@ header {
 }
 
 h2 {
-    border-bottom: 2px solid var(--primary-color);
+    border-bottom: 2px solid var(--bg-color);
     padding-bottom: 10px;
     margin-bottom: 20px;
     display: inline-block;
@@ -197,7 +200,7 @@ table td {
 }
 
 .accent:hover {
-    color: var(--accent-hover);
+    color: var(--text-muted);
 }
 
 /* الفوتر (معلومات التواصل) */
