@@ -22,6 +22,7 @@
     <title>X-NITRO - Power and protection in every drop</title>
     <link rel="stylesheet" href="./style.css">
     <link rel="preload" href="./nitro.png" as="image">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="./script.js" defer></script>
 </head>
 
@@ -42,7 +43,7 @@
     </section>
 
     <section class="hero">
-        
+
         <div class="product-details">
             <h1 class="accent">Ethanol Fuel Additive</h1>
             <p class="paragraph">
@@ -114,12 +115,50 @@
 
     </section>
 
+    <section class="contact-section" id="contact">
+        <h2 class="contact-h2">Contact Us / Order</h2>
+        <form id="contact-form" class="contact-form">
+            <div class="form-group">
+                <label for="contact-name">Name</label>
+                <input type="text" id="contact-name" name="name" required placeholder="Enter your name">
+            </div>
+            <div class="form-group">
+                <label for="contact-phone">Phone Number</label>
+                <input type="tel" id="contact-phone" name="phone" required placeholder="Enter your phone number">
+            </div>
+            <div class="form-group">
+                <label for="contact-email">Email Address</label>
+                <input type="email" id="contact-email" name="email" required placeholder="Enter your email address">
+            </div>
+            <div class="form-group">
+                <label for="contact-address">Your Address</label>
+                <input type="text" id="contact-address" name="address" required placeholder="Enter your address">
+            </div>
+            <div class="form-group">
+                <label for="contact-item">Desired Item / Inquiry</label>
+                <textarea id="contact-item" name="item" rows="4" required
+                    placeholder="Which item or inquiry do you have?"></textarea>
+            </div>
+            <button type="submit" class="submit-btn">Send Message</button>
+        </form>
+    </section>
+
     <footer class="accent">
-        <h3>Contact us</h3>
-        <p>Phone: +201038229597</p>
-        <p>Email: xnitro2026@gmail.com</p>
-        <p>Address: Suez, Egypt</p>
-        <p class="footer-copy">All rights reserved x-nitro<sup>©</sup> 2026</p>
+        <div class="info" id="info">
+            <h3>Contact us</h3>
+            <p>Phone: +201038229597</p>
+            <p>Email: xnitro2026@gmail.com</p>
+            <p>Address: Suez, Egypt</p>
+            <p class="footer-copy">All rights reserved x-nitro<sup>©</sup> 2026</p>
+        </div>
+        <div class="info">
+            <a href="https://www.facebook.com/" target="_blank"><span class="fa-brands fa-facebook fa-xl"></span></a>
+            <a href="https://www.instagram.com/?hl=ar" target="_blank"><span class="fa-brands fa-instagram fa-xl"></span></a>
+            <!--
+            <span class="fa-brands fa-tiktok fa-xl"><a href="https://www.tiktok.com/"></a></span>
+            -->
+            <a href="https://wa.me/201038229597" target="_blank"><span class="fa-brands fa-whatsapp fa-xl"></span></a>
+        </div>
     </footer>
 
     <div class="overlay" id="overlay"></div>
@@ -132,7 +171,7 @@
             <p class="empty-cart-msg">Your shopping cart is currently empty</p>
         </div>
         <div class="cart-total">Total: <span id="total-price">0</span> EGP</div>
-        <button class="whatsapp-btn" id="whatsapp-btn">تأكيد الطلب عبر واتساب</button>
+        <button class="whatsapp-btn" id="whatsapp-btn">Order via WhatsApp</button>
     </div>
 
 </body>

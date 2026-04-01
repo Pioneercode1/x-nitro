@@ -115,7 +115,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             <button class="qty-btn" data-index="${index}" data-change="1">+</button>
                         </div>
                         <button class="remove-btn" data-index="${index}">
-                            🗑️ إزالة
+                            🗑️ Remove
                         </button>
                     </div>
                 </div>
@@ -141,5 +141,27 @@ document.addEventListener('DOMContentLoaded', () => {
 
         let url = `https://wa.me/${whatsappNumber}?text=${message}`;
         window.open(url, '_blank');
+    }
+
+    // Contact Form Submission Logic
+    const contactForm = document.getElementById('contact-form');
+    if (contactForm) {
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const name = document.getElementById('contact-name').value;
+            const phone = document.getElementById('contact-phone').value;
+            const email = document.getElementById('contact-email').value;
+            const item = document.getElementById('contact-item').value;
+            
+            let whatsappNumber = "201038229597"; // Same number used for cart
+            let message = `*New Contact Request:*\n\n*Name:* ${name}\n*Phone:* ${phone}\n*Email:* ${email}\n*Desired Item / Inquiry:* ${item}`;
+            
+            let url = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+            window.open(url, '_blank');
+            
+            // Optionally clear the form after submission
+            contactForm.reset();
+        });
     }
 });

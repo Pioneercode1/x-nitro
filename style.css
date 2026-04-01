@@ -1,10 +1,8 @@
 :root {
     --bg-color: #ffffff;
-    --surface-color: #627c7c;
+    --surface-color: #121212;
     --primary-color: #00e676;
-    --text-muted: #121212;
     --accent: #810e21;
-    /* لون سيان عصري */
 }
 
 * {
@@ -16,7 +14,7 @@
 
 body {
     background-color: var(--bg-color);
-    color: var(--text-main);
+    color: var(--bg-color);
     line-height: 1.6;
 }
 
@@ -36,13 +34,13 @@ header {
 .logo {
     font-size: 24px;
     font-weight: bold;
-    color: var(--accent);
+    color: var(--bg-color);
 }
 
 .cart-btn {
     background: none;
-    border: 2px solid var(--text-muted);
-    color: var(--text-muted);
+    border: 2px solid var(--bg-color);
+    color: var(--bg-color);
     padding: 8px 15px;
     border-radius: 5px;
     cursor: pointer;
@@ -52,12 +50,12 @@ header {
 }
 
 .cart-btn:hover {
-    background: var(--text-muted);
-    color: var(--bg-color)
+    background-color: var(--bg-color);
+    color: var(--surface-color);
 }
 
 .paragraph {
-    color: var(--text-muted);
+    color: var(--surface-color);
     font-size: 18px;
 }
 
@@ -73,18 +71,17 @@ header {
 .product-image {
     flex: 1;
     min-width: 300px;
-    background-color: var(--surface-color);
-    padding: 1px;
     border-radius: 8px;
-    /*corner-shape: scoop;*/
+    corner-shape: scoop;
     text-align: center;
-    border: 1px solid #333;
-    transition: transform 0.7s ease-in;
+    border: 2px solid #333;
+    transition: transform 0.6s ease-in, border 0.6s linear;
 }
 
 .product-image:hover {
     transform: scale(1.1);
-    transition: transform 0.4s linear;
+    transition: transform 0.4s linear, border 0.4s ease-in;
+    border: none;
 }
 
 .product-image img {
@@ -106,13 +103,13 @@ header {
 
 .price {
     font-size: 28px;
-    color: var(--text-muted);
+    color: var(--surface-color);
     font-weight: bold;
     margin: 20px 0;
 }
 
 .add-to-cart-btn {
-    background-color: var(--text-muted);
+    background-color: var(--surface-color);
     color: var(--bg-color);
     border: none;
     padding: 15px 30px;
@@ -121,11 +118,12 @@ header {
     border-radius: 5px;
     cursor: pointer;
     width: 100%;
-    transition: 0.3s;
 }
 
 .add-to-cart-btn:hover {
-    background-color: var(--surface-color);
+    background-color: var(--bg-color);
+    border: 1px solid var(--surface-color);
+    color: var(--surface-color);
 }
 
 /* المميزات والمواصفات */
@@ -155,7 +153,7 @@ h2 {
 
 ul {
     list-style-position: inside;
-    color: var(--text-muted);
+    color: var(--bg-color);
 }
 
 ul li {
@@ -165,7 +163,7 @@ ul li {
 table {
     width: 100%;
     border-collapse: collapse;
-    color: var(--text-muted);
+    color: var(--bg-color);
 }
 
 table th,
@@ -176,7 +174,7 @@ table td {
 }
 
 .warn {
-    color: rgb(138, 9, 9);
+    color: var(--accent);
     font-weight: 700;
     padding-bottom: 4px;
     position: relative;
@@ -190,17 +188,13 @@ table td {
     left: 0;
     width: 15%;
     height: 5px;
-    background-color: rgb(138, 9, 9);
+    background-color: var(--accent);
     ;
     margin-bottom: 8px;
 }
 
 .accent {
-    color: var(--accent);
-}
-
-.accent:hover {
-    color: var(--text-muted);
+    color: var(--bg-color);
 }
 
 /* الفوتر (معلومات التواصل) */
@@ -210,7 +204,7 @@ footer {
     padding: 30px;
     margin-top: 40px;
     border-top: 1px solid #333;
-    color: var(--text-muted);
+    color: var(--surface-color);
 }
 
 .footer-copy {
@@ -218,9 +212,26 @@ footer {
     font-size: 12px;
 }
 
+#info {
+    margin-top: 2rem;
+    color: var(--bg-color);
+}
+
+.info:nth-child(2) {
+    margin-block: 3rem;
+}
+
+.info:nth-child(2) a {
+    color: var(--bg-color);
+}
+
+.info:nth-child(2) span {
+    margin-inline-end: 1rem;
+}
+
 .price-suffix {
     font-size: 14px;
-    color: var(--text-muted);
+    color: var(--surface-color);
 }
 
 /* سلة المشتريات (شريط جانبي) */
@@ -335,7 +346,7 @@ footer {
 .remove-btn {
     background: none;
     border: none;
-    color: #ff5555;
+    color: var(--accent);
     cursor: pointer;
     font-size: 14px;
     display: flex;
@@ -345,13 +356,13 @@ footer {
 }
 
 .remove-btn:hover {
-    color: #ff2222;
+    color: var(--accent);
     text-decoration: underline;
 }
 
 .empty-cart-msg {
     text-align: center;
-    color: var(--text-muted);
+    color: var(--surface-color);
     margin-top: 20px;
 }
 
@@ -363,8 +374,8 @@ footer {
 }
 
 .whatsapp-btn {
-    background-color: #25D366;
-    color: white;
+    background-color: var(--bg-color);
+    color: var(--surface-color);
     border: none;
     padding: 15px;
     font-size: 16px;
@@ -373,11 +384,12 @@ footer {
     cursor: pointer;
     text-align: center;
     width: 100%;
-    transition: 0.3s;
 }
 
 .whatsapp-btn:hover {
-    background-color: #1ebd5c;
+    background-color: transparent;
+    border: 1px solid var(--bg-color);
+    color: var(--bg-color);
 }
 
 /* تأثير التعتيم خلف السلة */
@@ -394,4 +406,81 @@ footer {
 
 .overlay.show {
     display: block;
+}
+
+/* نموذج التواصل (Contact Form) */
+.contact-section {
+    padding: 40px 5%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.contact-h2 {
+    color: var(--surface-color);
+    text-align: center;
+}
+
+.contact-form {
+    width: 100%;
+    max-width: 600px;
+    background-color: var(--surface-color);
+    padding: 30px;
+    border-radius: 10px;
+    border: 1px solid #333;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    margin-bottom: 5px;
+    color: var(--bg-color);
+    font-weight: bold;
+}
+
+.form-group input,
+.form-group textarea {
+    padding: 12px;
+    border: none;
+    border-radius: 5px;
+    background-color: var(--bg-color);
+    color: var(--surface-color);
+    font-size: 16px;
+    font-family: inherit;
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+    color: #aaa;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: 2px solid var(--primary-color);
+}
+
+.submit-btn {
+    background-color: var(--surface-color);
+    color: var(--bg-color);
+    border: 1px solid var(--bg-color);
+    padding: 15px;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+    margin-top: 10px;
+}
+
+.submit-btn:hover {
+    background-color: var(--bg-color);
+    border: none;
+    color: var(--surface-color);
 }
