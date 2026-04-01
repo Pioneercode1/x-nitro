@@ -144,7 +144,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Contact Form Submission Logic
-    const contactForm = document.getElementById('contact-form');
+    /*const contactForm = document.getElementById('contact-form');
     if (contactForm) {
         contactForm.addEventListener('submit', (e) => {
             e.preventDefault();
@@ -163,5 +163,5 @@ document.addEventListener('DOMContentLoaded', () => {
             // Optionally clear the form after submission
             contactForm.reset();
         });
-    }
+    }*/
 });
