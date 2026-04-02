@@ -74,13 +74,12 @@ header {
     border-radius: 8px;
     corner-shape: scoop;
     text-align: center;
-    border: 2px solid #333;
-    transition: transform 0.6s ease-in, border 0.6s linear;
+    transition: transform 0.6s ease-in;
 }
 
 .product-image:hover {
     transform: scale(1.1);
-    transition: transform 0.4s linear, border 0.4s ease-in;
+    transition: transform 0.4s linear;
     border: none;
 }
 
