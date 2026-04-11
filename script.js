@@ -5,9 +5,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const cartBtn = document.getElementById('cart-btn');
     const closeCartBtn = document.getElementById('close-cart-btn');
     const overlay = document.getElementById('overlay');
-    const addToCartBtn = document.getElementById('add-to-cart-btn');
     const cartSidebar = document.getElementById('cart-sidebar');
-    const whatsappBtn = document.getElementById('whatsapp-btn');
+    const checkoutBtn = document.getElementById('checkout-btn');
     const cartItemsDiv = document.getElementById('cart-items');
     const cartCountSpan = document.getElementById('cart-count');
     const totalPriceSpan = document.getElementById('total-price');
@@ -16,15 +15,16 @@ document.addEventListener('DOMContentLoaded', () => {
     if (cartBtn) cartBtn.addEventListener('click', toggleCart);
     if (closeCartBtn) closeCartBtn.addEventListener('click', toggleCart);
     if (overlay) overlay.addEventListener('click', toggleCart);
-    if (whatsappBtn) whatsappBtn.addEventListener('click', orderViaWhatsapp);
+    if (checkoutBtn) checkoutBtn.addEventListener('click', orderViaContactForm);
 
-    if (addToCartBtn) {
-        addToCartBtn.addEventListener('click', (e) => {
+    const addToCartBtns = document.querySelectorAll('.add-to-cart-btn');
+    addToCartBtns.forEach(btn => {
+        btn.addEventListener('click', (e) => {
             const name = e.target.getAttribute('data-name');
             const price = parseFloat(e.target.getAttribute('data-price'));
             addToCart(name, price);
         });
-    }
+    });
 
     // Event Delegation for Cart Actions (Increase/Decrease Quantity, Remove)
     if (cartItemsDiv) {
@@ -123,24 +123,27 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    function orderViaWhatsapp() {
+    function orderViaContactForm() {
         if (cart.length === 0) {
-            alert("السلة فارغة. أضف منتجات اولا.");
+            alert("Your cart is empty. Add items first.");
             return;
         }
 
-        let whatsappNumber = "201038229597";
-        let message = "السلام عليكم، عايز أطلب الآتي:%0A";
-
+        let message = "Order Details:\n";
         const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
 
         cart.forEach((item, index) => {
-            message += `${index + 1}- ${item.name} (Quantity: ${item.quantity}) - ${item.price * item.quantity} EGP%0A`;
+            message += `${index + 1}. ${item.name} (Quantity: ${item.quantity}) - ${item.price * item.quantity} EGP\n`;
         });
-        message += `%0Aالإجمالي: ${totalPrice} EGP`;
+        message += `\nTotal: ${totalPrice} EGP`;
 
-        let url = `https://wa.me/${whatsappNumber}?text=${message}`;
-        window.open(url, '_blank');
+        const contactItemField = document.getElementById('contact-item');
+        if (contactItemField) {
+            contactItemField.value = message;
+        }
+
+        toggleCart();
+        document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
     }
 
     // Contact Form Submission Logic
