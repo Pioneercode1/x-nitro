@@ -22,34 +22,60 @@
     <title>X-NITRO - Power and protection in every drop</title>
     <link rel="stylesheet" href="./style.css">
     <!--<link rel="preload" href="./nitro.png" as="image">-->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+        integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="./script.js" defer></script>
 </head>
 
 <body>
 
-    <header>
+    <header class="header">
         <div class="logo">X-NITRO</div>
-        <button class="cart-btn" id="cart-btn">Cart <span id="cart-count">0</span></button>
+
+        <div class="group-cart">
+            <div class="cart-container">
+                <span class="cart-count" id="cart-count">0</span>
+                <img class="icon-cart" src="./images/icon-cart.svg" alt="icon for cart" width="20" height="20">
+            </div>
+            <img class="avatar" src="./images/nitro.png" alt="image for admin" width="32" height="32">
+        </div>
+
     </header>
+
+    <div class="basket-container" id="basket-container">
+        <h2 class="heading-cart">Cart</h2>
+        <div class="empty-cart" id="empty-cart">
+            <p>Your cart is empty.</p>
+        </div>
+
+        <div class="basket-filled" id="basket-filled">
+            <button id="checkout-btn" class="checkout-btn">Order</button>
+        </div>
+
+    </div>
 
     <section class="hero">
         <div class="product-image">
             <img src="./images/nitro-l1.jpeg" alt="Ethanol Fuel Additive">
-            <div class="price"><del style="font-size: 20px; color: #888;">270 EGP</del> 229 EGP<span class="price-suffix"> / 1 liter (-15%)</span></div>
-            <button class="add-to-cart-btn" data-name="X-Nitro Ethanol (1L)" data-price="229" style="margin-bottom: 20px;">Buy it now</button>
+            <div class="price"><del style="font-size: 20px; color: #888;">270 EGP</del> 229 EGP<span
+                    class="price-suffix"> / 1 liter (-15%)</span></div>
+            <button id="add-1-btn" class="add-to-cart-btn" data-name="X-Nitro Ethanol (1L)" data-price="229"
+                style="margin-bottom: 20px;">Buy it now</button>
         </div>
         <div class="product-image">
             <img src="./images/nitro-l5.jpeg" alt="Ethanol Fuel Additive">
-            <div class="price"><del style="font-size: 20px; color: #888;">800 EGP</del> 600 EGP<span class="price-suffix"> / 5 liters (-25%)</span></div>
-            <button class="add-to-cart-btn" data-name="X-Nitro Ethanol (5L)" data-price="600">Buy it now</button>
+            <div class="price"><del style="font-size: 20px; color: #888;">800 EGP</del> 600 EGP<span
+                    class="price-suffix"> / 5 liters (-25%)</span></div>
+            <button id="add-5-btn" class="add-to-cart-btn" data-name="X-Nitro Ethanol (5L)" data-price="600">Buy
+                it now</button>
         </div>
     </section>
 
     <section class="hero">
 
         <div class="product-details">
-            <h1 class="accent">Ethanol Fuel Additive</h1>
+            <h1 id="heading">Ethanol Fuel Additive</h1>
             <p class="paragraph">
                 Unleash your engine's true potential. We provide premium ethanol fuel additives designed to boost
                 performance, clean your fuel system, and deliver a smoother ride.
@@ -152,24 +178,13 @@
         </div>
         <div class="info">
             <!-- <a href="https://www.facebook.com/" target="_blank"><span class="fa-brands fa-facebook fa-xl"></span></a> -->
-            <a href="https://www.instagram.com/x_nitro_ethanol?igsh=cDAwMXplZHN2MHpn&utm_source=qr" target="_blank"><span class="fa-brands fa-instagram fa-xl"></span></a>
-            <a href="https://www.tiktok.com/@x_nitro_ethanol?_r=1&_t=ZS-95BKhtI1DvQ" target="_blank"><span class="fa-brands fa-tiktok fa-xl"></span></a>
+            <a href="https://www.instagram.com/x_nitro_ethanol?igsh=cDAwMXplZHN2MHpn&utm_source=qr"
+                target="_blank"><span class="fa-brands fa-instagram fa-xl"></span></a>
+            <a href="https://www.tiktok.com/@x_nitro_ethanol?_r=1&_t=ZS-95BKhtI1DvQ" target="_blank"><span
+                    class="fa-brands fa-tiktok fa-xl"></span></a>
             <a href="https://wa.me/201038229597" target="_blank"><span class="fa-brands fa-whatsapp fa-xl"></span></a>
         </div>
     </footer>
-
-    <div class="overlay" id="overlay"></div>
-    <div class="cart-sidebar" id="cart-sidebar">
-        <div class="cart-header">
-            <h2>Shopping cart</h2>
-            <button class="close-cart" id="close-cart-btn">&times;</button>
-        </div>
-        <div class="cart-items" id="cart-items">
-            <p class="empty-cart-msg">Your shopping cart is currently empty</p>
-        </div>
-        <div class="cart-total">Total: <span id="total-price">0</span> EGP</div>
-        <button class="checkout-btn" id="checkout-btn">Checkout via Form</button>
-    </div>
 
 </body>
 

@@ -1,170 +1,143 @@
-document.addEventListener('DOMContentLoaded', () => {
-    let cart = [];
+const addBtn1 = document.getElementById('add-1-btn');
+const addBtn5 = document.getElementById('add-5-btn');
+const cartCountSpan = document.getElementById('cart-count');
+const showCart = document.querySelector('.icon-cart');
+const basketContainer = document.querySelector('.basket-container');
+const emptyCart = document.querySelector('.empty-cart');
+const basketFilled = document.querySelector('.basket-filled');
+const checkoutBtn = document.getElementById('checkout-btn');
 
-    // DOM Elements
-    const cartBtn = document.getElementById('cart-btn');
-    const closeCartBtn = document.getElementById('close-cart-btn');
-    const overlay = document.getElementById('overlay');
-    const cartSidebar = document.getElementById('cart-sidebar');
-    const checkoutBtn = document.getElementById('checkout-btn');
-    const cartItemsDiv = document.getElementById('cart-items');
-    const cartCountSpan = document.getElementById('cart-count');
-    const totalPriceSpan = document.getElementById('total-price');
+let cartItems = [];
 
-    // Attach Event Listeners
-    if (cartBtn) cartBtn.addEventListener('click', toggleCart);
-    if (closeCartBtn) closeCartBtn.addEventListener('click', toggleCart);
-    if (overlay) overlay.addEventListener('click', toggleCart);
-    if (checkoutBtn) checkoutBtn.addEventListener('click', orderViaContactForm);
+function updateCartUI() {
+    const totalQuantity = cartItems.reduce((sum, item) => sum + item.quantity, 0);
 
-    const addToCartBtns = document.querySelectorAll('.add-to-cart-btn');
-    addToCartBtns.forEach(btn => {
-        btn.addEventListener('click', (e) => {
-            const name = e.target.getAttribute('data-name');
-            const price = parseFloat(e.target.getAttribute('data-price'));
-            addToCart(name, price);
-        });
+    if (totalQuantity > 0) {
+        cartCountSpan.textContent = totalQuantity;
+        cartCountSpan.style.display = 'flex';
+        emptyCart.style.display = 'none';
+        basketFilled.style.display = 'block';
+    } else {
+        cartCountSpan.style.display = 'none';
+        emptyCart.style.display = 'block';
+        basketFilled.style.display = 'none';
+    }
+
+    renderCartItems();
+}
+
+function renderCartItems() {
+    // Remove existing items and summary
+    const oldItems = basketFilled.querySelectorAll('.product-info-cart');
+    oldItems.forEach(item => item.remove());
+
+    const oldSummary = basketFilled.querySelector('.cart-total-summary');
+    if (oldSummary) oldSummary.remove();
+
+    // Create item rows
+    cartItems.forEach((item, index) => {
+        const itemDiv = document.createElement('div');
+        itemDiv.className = 'product-info-cart';
+        itemDiv.innerHTML = `
+            <img class="img-cart" src="./images/nitro.png" alt="product image" width="50" height="50">
+            <div class="product-name">
+                <p>${item.name}</p>
+                <p class="p-price-cart">${item.price} EGP x <span class="count-cart">${item.quantity}</span> <span class="total-price">${(item.price * item.quantity)} EGP</span></p>
+            </div>
+            <button class="delete-btn" data-index="${index}"><img src="./images/icon-delete.svg" alt="Delete icon"></button>
+        `;
+        basketFilled.insertBefore(itemDiv, checkoutBtn);
     });
 
-    // Event Delegation for Cart Actions (Increase/Decrease Quantity, Remove)
-    if (cartItemsDiv) {
-        cartItemsDiv.addEventListener('click', (e) => {
-            const target = e.target;
-            const indexStr = target.getAttribute('data-index');
+    // Create total summary row
+    if (cartItems.length > 0) {
+        const summaryDiv = document.createElement('div');
+        summaryDiv.className = 'cart-total-summary';
+        summaryDiv.style.display = 'flex';
+        summaryDiv.style.justifyContent = 'space-between';
+        summaryDiv.style.paddingBlock = '1rem';
+        summaryDiv.style.marginBottom = '1rem';
+        summaryDiv.style.borderTop = '1px solid var(--accent)';
+        summaryDiv.style.color = 'var(--white)';
+        summaryDiv.style.fontSize = '1.1rem';
+        summaryDiv.style.fontWeight = 'bold';
 
-            // Allow clicking on child elements like an icon if added later
-            const itemIndex = indexStr !== null ? parseInt(indexStr) : parseInt(target.closest('button')?.getAttribute('data-index'));
-
-            if (isNaN(itemIndex)) return;
-
-            if (target.classList.contains('qty-btn') || target.closest('.qty-btn')) {
-                const changeStr = target.getAttribute('data-change') || target.closest('.qty-btn').getAttribute('data-change');
-                const change = parseInt(changeStr);
-                updateQuantity(itemIndex, change);
-            } else if (target.classList.contains('remove-btn') || target.closest('.remove-btn')) {
-                removeItem(itemIndex);
-            }
-        });
+        const totalPrice = cartItems.reduce((sum, item) => sum + item.quantity * item.price, 0);
+        summaryDiv.innerHTML = `<span>Total:</span><span>${totalPrice} EGP</span>`;
+        basketFilled.insertBefore(summaryDiv, checkoutBtn);
     }
 
-    // Core Functions
-    function toggleCart() {
-        cartSidebar.classList.toggle('open');
-        overlay.classList.toggle('show');
-    }
-
-    function addToCart(productName, price) {
-        const existingItem = cart.find(item => item.name === productName);
-
-        if (existingItem) {
-            existingItem.quantity += 1;
-        } else {
-            cart.push({ name: productName, price: price, quantity: 1 });
-        }
-
-        updateCartUI();
-
-        // Open cart to show user that the item was added
-        if (!cartSidebar.classList.contains('open')) {
-            toggleCart();
-        }
-    }
-
-    function updateQuantity(index, change) {
-        if (cart[index]) {
-            cart[index].quantity += change;
-            if (cart[index].quantity <= 0) {
-                cart.splice(index, 1);
-            }
+    // Bind delete handlers
+    const deleteBtns = basketFilled.querySelectorAll('.delete-btn');
+    deleteBtns.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            const targetBtn = e.target.closest('.delete-btn');
+            const idx = parseInt(targetBtn.getAttribute('data-index'));
+            cartItems.splice(idx, 1);
             updateCartUI();
-        }
-    }
-
-    function removeItem(index) {
-        if (cart[index]) {
-            cart.splice(index, 1);
-            updateCartUI();
-        }
-    }
-
-    function updateCartUI() {
-        const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
-        const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-
-        cartCountSpan.innerText = totalItems;
-        totalPriceSpan.innerText = totalPrice;
-
-        cartItemsDiv.innerHTML = '';
-
-        if (cart.length === 0) {
-            cartItemsDiv.innerHTML = '<p class="empty-cart-msg">Your shopping cart is currently empty</p>';
-            return;
-        }
-
-        cart.forEach((item, index) => {
-            cartItemsDiv.innerHTML += `
-                <div class="cart-item">
-                    <div class="cart-item-header">
-                        <span class="cart-item-title">${item.name}</span>
-                        <span class="cart-item-price">${item.price * item.quantity} EGP</span>
-                    </div>
-                    <div class="cart-item-controls">
-                        <div class="qty-controls">
-                            <button class="qty-btn" data-index="${index}" data-change="-1">-</button>
-                            <span class="qty-val">${item.quantity}</span>
-                            <button class="qty-btn" data-index="${index}" data-change="1">+</button>
-                        </div>
-                        <button class="remove-btn" data-index="${index}">
-                            🗑️ Remove
-                        </button>
-                    </div>
-                </div>
-            `;
         });
+    });
+}
+
+function addToCart(name, price) {
+    const existingItem = cartItems.find(item => item.name === name);
+    if (existingItem) {
+        existingItem.quantity += 1;
+    } else {
+        cartItems.push({ name, price, quantity: 1 });
     }
+    updateCartUI();
+    // Show cart automatically
+    basketContainer.style.display = 'block';
+}
 
-    function orderViaContactForm() {
-        if (cart.length === 0) {
-            alert("Your cart is empty. Add items first.");
-            return;
-        }
-
-        let message = "Order Details:\n";
-        const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-
-        cart.forEach((item, index) => {
-            message += `${index + 1}. ${item.name} (Quantity: ${item.quantity}) - ${item.price * item.quantity} EGP\n`;
-        });
-        message += `\nTotal: ${totalPrice} EGP`;
-
-        const contactItemField = document.getElementById('contact-item');
-        if (contactItemField) {
-            contactItemField.value = message;
-        }
-
-        toggleCart();
-        document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
-    }
-
-    // Contact Form Submission Logic
-    /*const contactForm = document.getElementById('contact-form');
-    if (contactForm) {
-        contactForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            
-            const name = document.getElementById('contact-name').value;
-            const phone = document.getElementById('contact-phone').value;
-            const email = document.getElementById('contact-email').value;
-            const item = document.getElementById('contact-item').value;
-            
-            let whatsappNumber = "201038229597"; // Same number used for cart
-            let message = `*New Contact Request:*\n\n*Name:* ${name}\n*Phone:* ${phone}\n*Email:* ${email}\n*Desired Item / Inquiry:* ${item}`;
-            
-            let url = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
-            window.open(url, '_blank');
-            
-            // Optionally clear the form after submission
-            contactForm.reset();
-        });
-    }*/
+addBtn1.addEventListener('click', () => {
+    addToCart('Ethanol Fuel Additive (1L)', 229);
 });
+
+addBtn5.addEventListener('click', () => {
+    addToCart('Ethanol Fuel Additive (5L)', 600);
+});
+
+showCart.addEventListener('click', () => {
+    basketContainer.style.display = basketContainer.style.display === 'block' ? 'none' : 'block';
+});
+
+window.addEventListener('click', (event) => {
+    // Close cart if clicked outside
+    if (!basketContainer.contains(event.target) &&
+        !showCart.contains(event.target) &&
+        !event.target.closest('.add-to-cart-btn') &&
+        !event.target.closest('.delete-btn')) {
+        basketContainer.style.display = 'none';
+    }
+});
+
+checkoutBtn.addEventListener('click', () => {
+    if (cartItems.length === 0) return;
+
+    let orderDetails = "Hello, I would like to order:\n";
+    cartItems.forEach(item => {
+        orderDetails += `- ${item.quantity}x ${item.name} (${item.price * item.quantity} EGP)\n`;
+    });
+
+    const totalPrice = cartItems.reduce((sum, item) => sum + item.quantity * item.price, 0);
+    orderDetails += `\nTotal: ${totalPrice} EGP`;
+
+    const contactItemTextarea = document.getElementById('contact-item');
+    if (contactItemTextarea) {
+        contactItemTextarea.value = orderDetails;
+    }
+
+    const contactSection = document.getElementById('contact');
+    if (contactSection) {
+        contactSection.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    // Close the cart
+    basketContainer.style.display = 'none';
+});
+
+// Boot up
+updateCartUI();
+
